@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+    <style>
+      #map {
+        height: 600px;
+        width: 600px;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="textinput" type="text" />
+    <button id="button" onclick="newLocation()">Find Location</button><br /><br />
+    <div id="map"></div>
+
+    <script>
+      let latx;let lngx;let map;let marker;let geocoder;let address;let latLng;
+      
+      // Initialize the map with the latitude and longitude
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: latx, lng: lngx },
+          zoom: 15,
+        });
+        marker = new google.maps.Marker({
+          position: { lat: latx, lng: lngx },
+          map: map,
+        });
+      }
+
+      // Get the latitude and longitude from the address
+      function getLatLngFromAddress(address) {
+        geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ address: address }, function (results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            latx = results[0].geometry.location.lat();
+            lngx = results[0].geometry.location.lng();
+            console.log(latx, lngx);
+            initMap();
+          } else {
+            console.log(null);
+          }
+        });
+      }
+
+      // Get the location from the input field
+      function newLocation() {
+        address = document.getElementById("textinput").value;
+        latLng = getLatLngFromAddress(address);
+      }
+
+      // Initialize the map with a default location
+      address = "Istanbul";
+      latLng = getLatLngFromAddress(address);
+    </script>
+  </body>
+</html>
