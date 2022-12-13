@@ -5,4 +5,4 @@
 
 ## 3- Examples
 
-![Example](https://github.com/gurkanyakar/Location-Finder/images/map-1.png)
+![Example](https://raw.githubusercontent.com/gurkanyakar/Location-Finder/main/images/map-1.PNG)
